@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<All>
+
+<task>
+<question>Who win the Football World Cup 2018?</question>
+<option>France</option>
+<option>Germany</option>
+<option>Argentina</option>
+</task>
+
+<task>
+<question>What is the total Population of world?</question>
+<option>7.7 Billion</option>
+<option>7.1 Billion</option>
+<option>7.3 Billion</option>
+</task>
+
+
+<task>
+<question>Where is Rome?</question>
+<option>195</option>
+<option>200</option>
+<option>188</option>
+</task>
+
+</All>
