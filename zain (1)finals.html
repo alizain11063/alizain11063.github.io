@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		.head{
+			margin-top: 160px; 
+			margin-bottom: 90px; 
+		}
+		.search{
+			margin-bottom: 30px; 
+		}
+		body{
+			background-image: url(https://i.ebayimg.com/images/i/253558162865-0-1/s-l1000.jpg);
+			background-size: cover;
+			height: 60vh;
+			position: relative;
+		}
+		table{
+			color: azure;
+		}
+	</style>
+	<title>Country Details</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+	<div class="head">
+		<div class="col-sm-12" align="center"><h1 style="color: azure;">Get Country Details</h1></div>
+	</div>
+	<div class="row">
+	<div class="container">
+	<div class="row search">
+	<div class="col-sm-10">
+ 	<input type="text" id="search" class="form-control" name="search" placeholder="Please enter the name of country..."/>
+ 	</div>
+	<div class="col-sm-2">
+ 	<a class="btn btn-primary" href="javascript:void(0)" onclick="search_a()">Search Country</a>
+ 	</div>
+ 	</div>
+ 	<div align="center" style="color: azure">
+ 	<h2 id="country_name"></h2>
+ 	<table style="display: none" class="table table-dark table-striped">
+ 		<tr>
+ 			<td width="25%">Country Code</td>
+ 			<td width="25%" id="alpha2Code"></td>
+ 			<td width="25%">Capital</td>
+ 			<td width="25%" id="capital"></td>
+ 		</tr>
+ 		<tr>
+ 			<td>Region</td>
+ 			<td id="region"></td>
+ 			<td>Sub Region</td>
+ 			<td id="subregion"></td>
+ 		</tr>
+ 		<tr>
+ 			<td>Population</td>
+ 			<td id="population"></td>
+ 			<td>Area</td>
+ 			<td id="area"></td>
+ 		</tr>
+ 		<tr>
+ 			<td>Latitude</td>
+ 			<td id="lat"></td>
+ 			<td>Longitude</td>
+ 			<td id="lng"></td>
+ 		</tr>
+ 		<tr>
+ 			<td>Demonym</td>
+ 			<td id="demonym"></td>
+ 			<td>Native Name</td>
+ 			<td id="nativeName"></td>
+ 		</tr>
+ 		<tr>
+ 			<td>Calling Code</td>
+ 			<td id="callingCodes"></td>
+ 			<td>Currency</td>
+ 			<td id="currencies"></td>
+ 		</tr>
+ 		 <tr>
+ 			<td colspan="4" align="center">
+ 				SUN
+ 			</td>
+ 		</tr>
+ 		<tr>
+ 			<td>Sunrise</td>
+ 			<td id="sunrise"></td>
+ 			<td>Sunset</td>
+ 			<td id="sunset"></td>
+ 		</tr>
+ 		<tr>
+ 			<td>Noon</td>
+ 			<td id="noon"></td>
+ 			<td>Dusk</td>
+ 			<td id="dusk"></td>
+ 		</tr>
+ 	</table>
+ 	</div>
+ </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script type="text/javascript">
+
+function search_a(){
+	search = $('#search').val();
+	$.ajax({
+        url : 'http://softwaredebugger.com/restcountries.php?country='+search,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+        	countryinfo = data[0][0];
+        	sun = data[2].sun;
+        	$('#country_name').html(countryinfo.name);
+        	$('#alpha2Code').html(countryinfo.alpha2Code);
+        	$('#capital').html(countryinfo.capital);
+        	$('#region').html(countryinfo.region);
+        	$('#timezones').html(countryinfo.timezones[0]);
+        	$('#area').html(countryinfo.area);
+        	$('#subregion').html(countryinfo.subregion);
+        	$('#population').html(countryinfo.population);
+        	$('#lat').html(countryinfo.latlng[0]);
+        	$('#lng').html(countryinfo.latlng[1]);
+        	$('#demonym').html(countryinfo.demonym);
+        	$('#nativeName').html(countryinfo.nativeName);
+        	$('#currencies').html(countryinfo.currencies[0]);
+        	$('#sunrise').html(sun[3].sunrise);
+        	$('#sunset').html(sun[1].sunset);
+        	$('#noon').html(sun[2].noon);
+        	$('#dusk').html(sun[4].dusk);
+			$('table').show();
+
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Fail'); 
+
+        }
+    });
+}
+</script>
+</html>
